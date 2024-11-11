@@ -1,19 +1,20 @@
 ### Escuela Colombiana de Ingeniería
 ### Arquitecturas de Software - ARSW
+#### 👩🏼‍💻👨🏻‍💻 AUTORES: [Saray Alieth Mendivelso Gonzalez](https://github.com/saraygonm) y [Miguel Camilo Tellez Ávila](https://github.com/miguel-tellez)
 
 ## Escalamiento en Azure con Maquinas Virtuales, Sacale Sets y Service Plans
 
 ### Dependencias
 * Cree una cuenta gratuita dentro de Azure. Para hacerlo puede guiarse de esta [documentación](https://azure.microsoft.com/es-es/free/students/). Al hacerlo usted contará con $100 USD para gastar durante 12 meses.
 
-### Parte 0 - Entendiendo el escenario de calidad
+### 📍Parte 0 - Entendiendo el escenario de calidad
 
 Adjunto a este laboratorio usted podrá encontrar una aplicación totalmente desarrollada que tiene como objetivo calcular el enésimo valor de la secuencia de Fibonnaci.
 
 **Escalabilidad**
 Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000) de la secuencia de Fibonacci de forma concurrente y el sistema se encuentra bajo condiciones normales de operación, todas las peticiones deben ser respondidas y el consumo de CPU del sistema no puede superar el 70%.
 
-### Parte 1 - Escalabilidad vertical
+### 📍Parte 1 - Escalabilidad vertical
 
 1. Diríjase a el [Portal de Azure](https://portal.azure.com/) y a continuación cree una maquina virtual con las características básicas descritas en la imágen 1 y que corresponden a las siguientes:
     * Resource Group = SCALABILITY_LAB
@@ -81,7 +82,7 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 12. Evalue el escenario de calidad asociado al requerimiento no funcional de escalabilidad y concluya si usando este modelo de escalabilidad logramos cumplirlo.
 13. Vuelva a dejar la VM en el tamaño inicial para evitar cobros adicionales.
 
-**Preguntas**
+❓**Preguntas**
 
 1. ¿Cuántos y cuáles recursos crea Azure junto con la VM?
 2. ¿Brevemente describa para qué sirve cada recurso?
@@ -97,7 +98,7 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
 11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor?
 
-### Parte 2 - Escalabilidad horizontal
+### 📍 Parte 2 - Escalabilidad horizontal
 
 #### Crear el Balanceador de Carga
 
@@ -181,7 +182,7 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10
 ```
 
-**Preguntas**
+❓**Preguntas**
 
 * ¿Cuáles son los tipos de balanceadores de carga en Azure y en qué se diferencian?, ¿Qué es SKU, qué tipos hay y en qué se diferencian?, ¿Por qué el balanceador de carga necesita una IP pública?
 * ¿Cuál es el propósito del *Backend Pool*?
