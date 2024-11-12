@@ -31,17 +31,60 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 ![Imágen 1](images/part1/part1-vm-basic-config.png)
 
 Nota: para llevar a cabo el proceso, antes se debe crear una clave SSH, tal como se muestra a continuación:
-<p align="center">
-<img src="images/partRTA/3.1.png" alt="" width="700px">
-</p>
+
+<!-- Creación de tabla para alinear las imágenes lado a lado.-->
+| <img src="images/partRTA/3.png" alt="Descarga local" width="500px"> | <img src="images/partRTA/2.png" alt="Importar carpetas" width="500px"> |
+|---------------------------------------------------------------------|---------------------------------------------------------------|
+| **Imagen 1: Descarga local**                                        | **Imagen 2: Importar carpetas**                               |
 
 - Se crea la máquina virtual siguiendo los parametros anteriores 
-- AGREGAR 2 IMAGENS
+<p align="center">
+<img src="images/partRTA/4.png" alt="" width="700px">
+</p>
+
+
 2. Para conectarse a la VM use el siguiente comando, donde las `x` las debe remplazar por la IP de su propia VM (Revise la sección "Connect" de la virtual machine creada para tener una guía más detallada).
 
     `ssh scalability_lab@xxx.xxx.xxx.xxx`
+- **Primero:** abrimos el simbolo del sistema de nuestro PC.
+- **Segundo:** Copiamos la Dirección IP Pública, que aparece en la Opción de `Conectar` 
+<p align="center">
+<img src="images/partRTA/5.png" alt="" width="700px">
+</p>
+
+- **Tercero:** Digitamos en nuestra consola `C:\Users\aliet>ssh -i C:\Users\aliet\Downloads\arquitectura\ARSW-LAB09\Lab9.pem scalability_lab@xxx`
+<p align="center">
+<img src="images/partRTA/6.png" alt="" width="700px">
+</p>
+<p align="center">
+<img src="images/partRTA/6.1.png" alt="" width="700px">
+</p>
 
 3. Instale node, para ello siga la sección *Installing Node.js and npm using NVM* que encontrará en este [enlace](https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/).
+
+- Instalamos nvm, por medio del siguiente comando:
+<p align="center">
+<img src="images/partRTA/7.png" alt="" width="700px">
+</p>
+
+- Reiniciamos el cmd y verificamos la instalacion usando `nvm --version` :
+
+<p align="center">
+<img src="images/partRTA/7.1.png" alt="" width="700px">
+</p>
+
+- Seguidamente instalamos node `nvm install node`
+
+<p align="center">
+<img src="images/partRTA/7.2.png" alt="" width="700px">
+</p>
+
+- Por último Verificamos la instalación de TODO `nvm ls`
+
+<p align="center">
+<img src="images/partRTA/7.3.png" alt="" width="700px">
+</p>
+
 4. Para instalar la aplicación adjunta al Laboratorio, suba la carpeta `FibonacciApp` a un repositorio al cual tenga acceso y ejecute estos comandos dentro de la VM:
 
     `git clone <your_repo>`
@@ -50,29 +93,94 @@ Nota: para llevar a cabo el proceso, antes se debe crear una clave SSH, tal como
 
     `npm install`
 
+<p align="center">
+<img src="images/partRTA/8.png" alt="" width="700px">
+</p>
+
 5. Para ejecutar la aplicación puede usar el comando `npm FibinacciApp.js`, sin embargo una vez pierda la conexión ssh la aplicación dejará de funcionar. Para evitar ese compartamiento usaremos *forever*. Ejecute los siguientes comando dentro de la VM.
 
     ` node FibonacciApp.js`
+
+<p align="center">
+<img src="images/partRTA/9.1.png" alt="" width="700px">
+</p>
+
 
 6. Antes de verificar si el endpoint funciona, en Azure vaya a la sección de *Networking* y cree una *Inbound port rule* tal como se muestra en la imágen. Para verificar que la aplicación funciona, use un browser y user el endpoint `http://xxx.xxx.xxx.xxx:3000/fibonacci/6`. La respuesta debe ser `The answer is 8`.
 
 ![](images/part1/part1-vm-3000InboudRule.png)
 
+- Creamos un ACL del puerto y lo llamamos `Port_3000`
+
+<p align="center">
+<img src="images/partRTA/9.png" alt="" width="700px">
+</p>
+
+- En el navegador revisamos que el endpoint funcione:
+
+<p align="center">
+<img src="images/partRTA/9.2.png" alt="" width="700px">
+</p>
+
+
 7. La función que calcula en enésimo número de la secuencia de Fibonacci está muy mal construido y consume bastante CPU para obtener la respuesta. Usando la consola del Browser documente los tiempos de respuesta para dicho endpoint usando los siguintes valores:
-    * 1000000
-    * 1010000
-    * 1020000
-    * 1030000
-    * 1040000
-    * 1050000
-    * 1060000
-    * 1070000
-    * 1080000
-    * 1090000    
+* 1000000
+<p align="center">
+<img src="images/partRTA/77.0.png" alt="" width="700px">
+</p>
+
+* 1010000
+<p align="center">
+<img src="images/partRTA/77.2.png" alt="" width="700px">
+</p>
+
+* 1020000
+<p align="center">
+<img src="images/partRTA/77.3.png" alt="" width="700px">
+</p>
+
+* 1030000
+<p align="center">
+<img src="images/partRTA/77.4.png" alt="" width="700px">
+</p>
+
+* 1040000
+<p align="center">
+<img src="images/partRTA/77.5.png" alt="" width="700px">
+</p>
+
+* 1050000
+<p align="center">
+<img src="images/partRTA/77.6.png" alt="" width="700px">
+</p>
+
+* 1060000
+<p align="center">
+<img src="images/partRTA/77.7.png" alt="" width="700px">
+</p>
+
+* 1070000
+<p align="center">
+<img src="images/partRTA/77.8.png" alt="" width="700px">
+</p>
+
+* 1080000
+<p align="center">
+<img src="images/partRTA/77.91.png" alt="" width="700px">
+</p>
+
+* 1090000    
+<p align="center">
+<img src="images/partRTA/77.10.png" alt="" width="700px">
+</p>
 
 8. Dírijase ahora a Azure y verifique el consumo de CPU para la VM. (Los resultados pueden tardar 5 minutos en aparecer).
 
 ![Imágen 2](images/part1/part1-vm-cpu.png)
+- Los resultados:
+<p align="center">
+<img src="images/partRTA/88.png" alt="" width="700px">
+</p>
 
 9. Ahora usaremos Postman para simular una carga concurrente a nuestro sistema. Siga estos pasos.
     * Instale newman con el comando `npm install newman -g`. Para conocer más de Newman consulte el siguiente [enlace](https://learning.getpostman.com/docs/postman/collection-runs/command-line-integration-with-newman/).
@@ -93,20 +201,100 @@ Nota: para llevar a cabo el proceso, antes se debe crear una clave SSH, tal como
 12. Evalue el escenario de calidad asociado al requerimiento no funcional de escalabilidad y concluya si usando este modelo de escalabilidad logramos cumplirlo.
 13. Vuelva a dejar la VM en el tamaño inicial para evitar cobros adicionales.
 
+---------------
 ❓**Preguntas**
 
 1. ¿Cuántos y cuáles recursos crea Azure junto con la VM?
-2. ¿Brevemente describa para qué sirve cada recurso?
-3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio?
+- Azure crea un total de 7 recursos
+  - Clave SSH.
+  - Máquina Virtual.
+  - Dirección Ip Pública.
+  - Grupo de seguridad de red.
+  - Red virtual.
+  - Interfaz de red
+  - Disco
+  
+<p align="center">
+<img src="images/partRTA/pre1/1.png" alt="" width="700px">
+</p>
+
+------------------
+
+2. **¿Brevemente describa para qué sirve cada recurso?**
+
+| Recurso                   | Descripción                                                                                              |
+|---------------------------|----------------------------------------------------------------------------------------------------------|
+| **Clave SSH**             | Credencial que permite la conexión segura y sin contraseña a una máquina virtual.                        |
+| **Máquina Virtual**       | Recurso de cómputo que ejecuta sistemas operativos y aplicaciones en un entorno aislado.                 |
+| **Dirección IP Pública**   | Dirección única accesible desde internet para que la VM sea alcanzable desde fuera de la red privada.    |
+| **Grupo de Seguridad de Red** | Conjunto de reglas de firewall que controla el tráfico de red hacia y desde los recursos asociados.      |
+| **Red Virtual**           | Red privada en la nube para conectar varios recursos entre sí.                                           |
+| **Interfaz de Red**       | Componente que conecta una VM con la red, permitiendo el envío y recepción de tráfico en la red virtual. |
+| **Disco**                 | Almacenamiento persistente que guarda datos de la VM, como sistema operativo, aplicaciones y archivos.   |
+
+--------------
+3. **¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el 
+comando `npm FibonacciApp.js`?**
+   
+-   Al ejecutar una aplicación en la terminal a través de una conexión SSH, esta corre dentro del
+    contexto de dicha sesión. Es decir, su funcionamiento depende de que la sesión SSH permanezca activa.
+    Por lo tanto, al cerrar la conexión SSH, todos los procesos en ejecución en esa sesión,
+    incluyendo la aplicación iniciada (por ejemplo,`npm FibonacciApp.js`), se detendrán.
+
+
+**¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio?**
+
+  - Es necesario crear una regla de puerto de entrada para permitir el acceso al servicio desde Internet, ya que Azure bloquea el tráfico entrante por seguridad si no se configura una excepción.
+
+
+  -  En este caso, fue necesario configurar una regla para permitir el acceso a través del puerto 3000, donde se ejecuta nuestra aplicación. Sin esta regla, Azure bloquearía todo el tráfico hacia ese puerto por motivos de seguridad
+-------------
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
+
+
+------------
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
+
+--------------
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
     * Tiempos de ejecución de cada petición.
+   
     * Si hubo fallos documentelos y explique.
+
+-----------
 7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)?
-8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM?
-9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
-10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
+
+-------------------------
+**8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?**
+- Aumentar el tamaño de la VM es útil si se cuenta con los recursos económicos,
+  ya que una opción como B2ms mejora la CPU, la memoria y reduce tiempos de respuesta comparado
+  con B1ls
+
+
+**¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM?**
+- Según lo mencionado anteriormente, la situación permitiría cálculos más rápidos en FibonacciApp. Sin embargo, esto no resuelve el 
+problema de fondo, ya que la aplicación sigue sin estar optimizada.
+  - **Una solución ideal** implicaría optimizar el código de FibonacciApp para aprovechar al máximo los recursos, 
+  independientemente del tamaño de la VM.
+------------
+
+9. **¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM?**
+- Cuando cambia el tamaño de la VM, la infraestructura debe adaptarse a los nuevos recursos
+asignados, lo que puede implicar un breve tiempo de inactividad mientras se realiza 
+la reconfiguración. 
+
+**¿Qué efectos negativos implica?**
+- interrupciones en el servicio
+- Aumento en los costos operativos
+- Mayor consumo de recursos que podría no estar completamente
+  justificado si la aplicación no está optimizada, lo que reduciría la eficiencia general
+
+-------------
+10. **¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?**
+- Sí, hubo una mejora en el consumo de CPU y en los tiempos de respuesta, debido a que al aumentar los recursos disponibles, la VM puede procesar las
+peticiones de forma más eficiente y rápida, reduciendo la carga en cada solicitud.
+
+------------
 11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor?
 
 ### 📍 Parte 2 - Escalabilidad horizontal
