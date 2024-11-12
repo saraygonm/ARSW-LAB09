@@ -7,6 +7,10 @@
 ### Dependencias
 * Cree una cuenta gratuita dentro de Azure. Para hacerlo puede guiarse de esta [documentación](https://azure.microsoft.com/es-es/free/students/). Al hacerlo usted contará con $100 USD para gastar durante 12 meses.
 
+<p align="center">
+<img src="images/partRTA/1.png" alt="" width="700px">
+</p>
+
 ### 📍Parte 0 - Entendiendo el escenario de calidad
 
 Adjunto a este laboratorio usted podrá encontrar una aplicación totalmente desarrollada que tiene como objetivo calcular el enésimo valor de la secuencia de Fibonnaci.
@@ -26,6 +30,13 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 ![Imágen 1](images/part1/part1-vm-basic-config.png)
 
+Nota: para llevar a cabo el proceso, antes se debe crear una clave SSH, tal como se muestra a continuación:
+<p align="center">
+<img src="images/partRTA/3.1.png" alt="" width="700px">
+</p>
+
+- Se crea la máquina virtual siguiendo los parametros anteriores 
+- AGREGAR 2 IMAGENS
 2. Para conectarse a la VM use el siguiente comando, donde las `x` las debe remplazar por la IP de su propia VM (Revise la sección "Connect" de la virtual machine creada para tener una guía más detallada).
 
     `ssh scalability_lab@xxx.xxx.xxx.xxx`
