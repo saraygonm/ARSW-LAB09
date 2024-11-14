@@ -46,8 +46,16 @@ Nota: para llevar a cabo el proceso, antes se debe crear una clave SSH, tal como
 2. Para conectarse a la VM use el siguiente comando, donde las `x` las debe remplazar por la IP de su propia VM (Revise la sección "Connect" de la virtual machine creada para tener una guía más detallada).
 
     `ssh scalability_lab@xxx.xxx.xxx.xxx`
+
+
+
+#### NOTA: Se decide ocultar la DIR IP por motivos de seguridad, ya que se recibio un correo de advertencia  :)
+<p align="center">
+<img src="images/gitGuardian/Image.jpeg" alt="" width="200px">
+</p>
+
 - **Primero:** abrimos el simbolo del sistema de nuestro PC.
-- **Segundo:** Copiamos la Dirección IP Pública, que aparece en la Opción de `Conectar` 
+- **Segundo:** Copiamos la Dirección IP Pública, que aparece en la Opción de `Conectar`
 <p align="center">
 <img src="images/partRTA/5.png" alt="" width="700px">
 </p>
