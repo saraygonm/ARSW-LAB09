@@ -205,13 +205,94 @@ Nota: para llevar a cabo el proceso, antes se debe crear una clave SSH, tal como
   newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
   newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10
   ```
+<p align="center">
+<img src="images/partRTA/y3.png" alt="" width="700px">
+</p>
+
+<p align="center">
+<img src="images/partRTA/y4.png" alt="" width="700px">
+</p>
+
 
 10. La cantidad de CPU consumida es bastante grande y un conjunto considerable de peticiones concurrentes pueden hacer fallar nuestro servicio. Para solucionarlo usaremos una estrategia de Escalamiento Vertical. En Azure diríjase a la sección *size* y a continuación seleccione el tamaño `B2ms`.
 
 ![Imágen 3](images/part1/part1-vm-resize.png)
 
 11. Una vez el cambio se vea reflejado, repita el paso 7, 8 y 9.
+
+* 1000000
+<p align="center">
+<img src="images/partRTA/11.png" alt="" width="700px">
+</p>
+
+* 1010000
+<p align="center">
+<img src="images/partRTA/11.1.png" alt="" width="700px">
+</p>
+
+* 1020000
+<p align="center">
+<img src="images/partRTA/11.2.png" alt="" width="700px">
+</p>
+
+* 1030000
+<p align="center">
+<img src="images/partRTA/11.3.png" alt="" width="700px">
+</p>
+
+* 1040000
+<p align="center">
+<img src="images/partRTA/11.4.png" alt="" width="700px">
+</p>
+
+* 1050000
+<p align="center">
+<img src="images/partRTA/11.5.png" alt="" width="700px">
+</p>
+
+* 1060000
+<p align="center">
+<img src="images/partRTA/11.6.png" alt="" width="700px">
+</p>
+
+* 1070000
+<p align="center">
+<img src="images/partRTA/11.7.png" alt="" width="700px">
+</p>
+
+* 1080000
+<p align="center">
+<img src="images/partRTA/11.8.png" alt="" width="700px">
+</p>
+
+* 1090000
+<p align="center">
+<img src="images/partRTA/11.9.png" alt="" width="700px">
+</p>
+
+**MÉTRICAS**
+
+<p align="center">
+<img src="images/partRTA/11.a.png" alt="" width="700px">
+</p>
+
+**NEWMAN**
+
+<p align="center">
+<img src="images/partRTA/ya.png" alt="" width="700px">
+</p>
+
+<p align="center">
+<img src="images/partRTA/y2.png" alt="" width="700px">
+</p>
+
 12. Evalue el escenario de calidad asociado al requerimiento no funcional de escalabilidad y concluya si usando este modelo de escalabilidad logramos cumplirlo.
+
+- Efectivamente, se cumple con el criterio de calidad de escalabilidad, dado que al incrementar 
+el tamaño de la máquina virtual, optimizamos sus especificaciones, 
+lo cual resulta en tiempos de respuesta más rápidos y un menor consumo de CPU.
+
+
 13. Vuelva a dejar la VM en el tamaño inicial para evitar cobros adicionales.
 
 ---------------
@@ -264,18 +345,82 @@ comando `npm FibonacciApp.js`?**
 -------------
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
 
+| n          | Tiempo en B2ms (s) | Tiempo estimado en B1ms (s) |
+|------------|-------------------|-----|
+| 1,000,000  | 210               | 315 |
+| 1,010,000  | 228               | 342 |
+| 1,020,000  | 216               | 324 |
+| 1,030,000  | 222               | 333 |
+| 1,040,000  | 222               | 333 |
+| 1,050,000  | 228               | 342 |
+| 1,060,000  | 234               | 351 |
+| 1,070,000  | 220               | 331 |
+| 1,080,000  | 17.4              | 26.1  |
+| 1,090,000  | 17.22             | 25.83  |
 
 ------------
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
 
+<p align="center">
+<img src="images/partRTA/11.a.png" alt="" width="700px">
+</p>
+
+- La función consume altos niveles de CPU durante ciertos picos debido a operaciones intensivas, como procesamiento complejo o manejo de grandes volúmenes de datos. 
+- Luego, el consumo disminuye y se estabiliza, indicando que estas tareas demandantes son temporales y el alto uso de CPU está ligado a cargas de trabajo específicas.
+
 --------------
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
     * Tiempos de ejecución de cada petición.
-   
-    * Si hubo fallos documentelos y explique.
+
+- B1ls:
+<p align="center">
+<img src="images/partRTA/p6.png" alt="" width="600px">
+</p>
+
+-Este tiempo de respuesta promedio más alto indica un rendimiento más lento en comparación con B2ls.
+
+--------------------
+- B2ls:
+<p align="center">
+<img src="images/partRTA/p62.png" alt="" width="600px">
+</p>
+
+- Se evidencia un rendimiento más rápido y consistente, con un tiempo de respuesta promedio más bajo.
+
+
+* Si hubo fallos documentelos y explique.
+
+Ocurrió un fallo con el error **"read ECONNRESET"**. Este error ocurre cuando la conexión TCP se cierra de forma inesperada desde el lado del servidor, lo cual puede deberse a problemas de red o a una sobrecarga en el servidor.
 
 -----------
 7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)?
+
+**Tamaños de VM en Azure**
+
+#### 1. B1ls
+La **B1ls** es la opción más pequeña y económica de Azure. Está equipada con:
+
+- **vCPUs:** 1
+- **RAM:** 0.5 GiB
+- **Discos de datos:** 2
+- **Máximo IOPS:** 160
+- **Almacenamiento temporal:** 4 GiB
+- **Costo mensual:** 3,80 USD
+
+Se usa en cargas de trabajo ligeras que no requieren mucho poder de procesamiento ni memoria, como desarrollo, pruebas o aplicaciones que no son intensivas en recursos.
+
+-------------------
+#### 2. B2ms
+La **B2ms** es una opción de tamaño medio dentro de la serie B, diseñada para cargas de trabajo que pueden requerir un rendimiento adicional durante momentos de alta demanda. Sus especificaciones son:
+
+- **vCPUs:** 2
+- **RAM:** 8 GiB
+- **Discos de datos:** 4
+- **Máximo IOPS:** 1920
+- **Almacenamiento temporal:** 16 GiB
+- **Costo mensual:** 60,74 USD
+
+Esta VM es adecuada para aplicaciones que operan a niveles de rendimiento moderados, pero que necesitan capacidad adicional en picos de uso. La B2ms puede acumular hasta 864 créditos de CPU en un período de 24 horas, permitiendo mayor rendimiento en momentos específicos.
 
 -------------------------
 **8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?**
@@ -320,21 +465,51 @@ Antes de continuar puede eliminar el grupo de recursos anterior para evitar gast
 
 ![](images/part2/part2-lb-create.png)
 
+- En la barra de búsqueda, digitamos Balanceador de Carga y procedemos a crearla, de esta manera:
+<p align="center">
+<img src="images/part2RTA/1.png" alt="" width="700px">
+</p>
+
+- Seguidamente creamos un IP address Configuration:
+<p align="center">
+<img src="images/part2RTA/1.1.png" alt="" width="700px">
+</p>
+
 2. A continuación cree un *Backend Pool*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-bp-create.png)
 
+- Creación del *Backend Pool*
+<p align="center">
+<img src="images/part2RTA/1.2.png" alt="" width="700px">
+</p>
 3. A continuación cree un *Health Probe*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-hp-create.png)
+
+- Creación del *Health Probe*
+<p align="center">
+<img src="images/part2RTA/3.png" alt="" width="700px">
+</p>
 
 4. A continuación cree un *Load Balancing Rule*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-lbr-create.png)
 
+- Creación del *Load Balancing Rule*
+<p align="center">
+<img src="images/part2RTA/4.png" alt="" width="700px">
+</p>
+
 5. Cree una *Virtual Network* dentro del grupo de recursos, guiese con la siguiente imágen.
 
 ![](images/part2/part2-vn-create.png)
+
+- Creación del *Virtual Network*
+<p align="center">
+<img src="images/part2RTA/5.png" alt="" width="700px">
+</p>
+
 
 #### Crear las maquinas virtuales (Nodos)
 
@@ -343,6 +518,12 @@ Ahora vamos a crear 3 VMs (VM1, VM2 y VM3) con direcciones IP públicas standar 
 1. En la configuración básica de la VM guíese por la siguiente imágen. Es importante que se fije en la "Avaiability Zone", donde la VM1 será 1, la VM2 será 2 y la VM3 será 3.
 
 ![](images/part2/part2-vm-create1.png)
+
+- Creación de las claves SSH
+<p align="center">
+<img src="images/part2RTA/6.png" alt="" width="700px">
+</p>
+
 
 2. En la configuración de networking, verifique que se ha seleccionado la *Virtual Network*  y la *Subnet* creadas anteriormente. Adicionalmente asigne una IP pública y no olvide habilitar la redundancia de zona.
 
@@ -382,8 +563,16 @@ Realice este proceso para las 3 VMs, por ahora lo haremos a mano una por una, si
 http://52.155.223.248/
 http://52.155.223.248/fibonacci/1
 ```
+<p align="center">
+<img src="images/part2RTA/a.png" alt="" width="700px">
+</p>
 
 2. Realice las pruebas de carga con `newman` que se realizaron en la parte 1 y haga un informe comparativo donde contraste: tiempos de respuesta, cantidad de peticiones respondidas con éxito, costos de las 2 infraestrucruras, es decir, la que desarrollamos con balanceo de carga horizontal y la que se hizo con una maquina virtual escalada.
+
+<p align="center">
+<img src="images/part2RTA/b.png" alt="" width="700px">
+</p>
+
 
 3. Agregue una 4 maquina virtual y realice las pruebas de newman, pero esta vez no lance 2 peticiones en paralelo, sino que incrementelo a 4. Haga un informe donde presente el comportamiento de la CPU de las 4 VM y explique porque la tasa de éxito de las peticiones aumento con este estilo de escalabilidad.
 
@@ -393,19 +582,166 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
 newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10
 ```
+- Consumo del CPU con 4 peticiones que se realizan de forma paralela
+  -   VM1
 
+| <img src="images/part2RTA/c.png" alt="Descarga local" width="500px"> | <img src="images/part2RTA/c.1.png" alt="Importar carpetas" width="500px"> |
+|--------------------------------------------------------------------|---------------------------------------------------------------------------|
+| **Imagen 1:Métrica**                                               | **Imagen 2: En detalle**                                                  |
+
+
+- VM2
+
+
+| <img src="images/part2RTA/d.png" alt="Descarga local" width="500px"> | <img src="images/part2RTA/d2.png" alt="Importar carpetas" width="500px"> |
+|--------------------------------------------------------------------|--------------------------------------------------------------------------|
+| **Imagen 1:Métrica**                                               | **Imagen 2: En detalle**                                                 |
+
+- Pruebas newman
+<p align="center">
+<img src="images/part2RTA/e.png" alt="" width="700px">
+</p>
+
+<p align="center">
+<img src="images/part2RTA/e1.png" alt="" width="700px">
+</p>
+
+<p align="center">
+<img src="images/part2RTA/e2.png" alt="" width="700px">
+</p>
+
+<p align="center">
+<img src="images/part2RTA/e3.png" alt="" width="700px">
+</p>
+
+
+### Análisis de Comportamiento de CPU en Máquinas Virtuales
+
+### 1. Máquina Virtual 1 (VM1)
+- **Uso promedio de CPU:** 7.85% en su punto más alto.
+- **Observación:** La carga es adecuada y la VM1 responde eficientemente sin llegar a saturarse.
+
+### 2. Máquina Virtual 2 (VM2)
+- **Uso promedio de CPU:** 6.78% como máximo.
+- **Observación:** La baja utilización sugiere que la VM2 maneja bien la carga de trabajo, garantizando un rendimiento estable.
+
+### 3. Máquina Virtual 3 (VM3)
+- **Observación:** Se observan valores de consumo de CPU controlados, lo cual indica que las cargas están bien distribuidas y la VM3 no alcanza el límite de su capacidad.
+
+### 4. Máquina Virtual 4 (VM4)
+- **Observación:** La VM4 muestra un comportamiento de CPU en rangos aceptables, contribuyendo a la estabilidad y consistencia en las respuestas del sistema.
+
+---
+
+### Explicación: Aumento en la Tasa de Éxito de las Peticiones
+
+El incremento en la tasa de éxito de las peticiones se debe a la **estrategia de escalabilidad** implementada. Los beneficios observados incluyen:
+
+- **Reducción de la Carga Individual:** Cada máquina soporta una fracción menor del tráfico total, evitando la saturación de recursos.
+- **Respuesta Más Rápida y Eficiente:** El balanceo de carga permite responder más rápido, reduciendo el tiempo de respuesta y mejorando la tasa de éxito.
+- **Escalabilidad Horizontal Eficiente:** La adición de más instancias permite manejar picos de tráfico sin afectar el rendimiento, asegurando que las peticiones no queden sin respuesta.
+
+--------------------
 ❓**Preguntas**
 
-* ¿Cuáles son los tipos de balanceadores de carga en Azure y en qué se diferencian?, ¿Qué es SKU, qué tipos hay y en qué se diferencian?, ¿Por qué el balanceador de carga necesita una IP pública?
+**¿Cuáles son los tipos de balanceadores de carga en Azure y en qué se diferencian?**
+
+- **Balanceador de Carga Interno (ILB):** Distribuye tráfico dentro de una red virtual de Azure. Se usa para aplicaciones internas que no deben ser accesibles desde Internet.
+- **Balanceador de Carga Público (PLB):** Distribuye tráfico de Internet hacia las instancias de VM. Utiliza una IP pública y es accesible desde Internet.
+
+
+
+**¿Qué es SKU, qué tipos hay y en qué se diferencian?**
+
+SKU (Stock Keeping Unit) identifica y distingue servicios o recursos en Azure.
+
+
+- **Tipos y diferencias:**
+    - **Basic:** Ofrece capacidades básicas de balanceo.
+    - **Standard:** Proporciona funcionalidades avanzadas, como reglas de red y alta disponibilidad.
+
+**¿Por qué el balanceador de carga necesita una IP pública?**
+**IP Pública en el Balanceador de Carga**
+-  Permite que el balanceador de carga sea accesible desde Internet, facilitando la distribución de tráfico hacia las VM.
+
+------------
 * ¿Cuál es el propósito del *Backend Pool*?
+- El *Backend Pool* es un conjunto de instancias de máquinas
+virtuales que reciben el tráfico distribuido por el balanceador de carga. Su propósito es definir a cuáles máquinas virtuales se debe enviar el tráfico entrante.
+
+------------
 * ¿Cuál es el propósito del *Health Probe*?
+
+El *Health Probe* monitorea el estado de las instancias en el *Backend Pool* para asegurarse de que solo se envíe tráfico a instancias saludables. Si una instancia falla en responder correctamente al probe, es excluida temporalmente hasta que vuelva a estar operativa.
+__________
+
 * ¿Cuál es el propósito de la *Load Balancing Rule*? ¿Qué tipos de sesión persistente existen, por qué esto es importante y cómo puede afectar la escalabilidad del sistema?.
+
+
+La *Load Balancing Rule* define cómo el tráfico se distribuye entre las instancias en el *Backend Pool*. Especifica configuraciones como el puerto y el protocolo para el tráfico balanceado.
+
+- **Sesión Persistente:** Existen dos tipos de sesión persistente:
+    - **Session Affinity (conexión persistente o "sticky sessions"):** Mantiene la conexión de un cliente con la misma instancia de backend. Esto es importante para aplicaciones que requieren persistencia de sesión.
+    - **Round Robin:** No mantiene la sesión persistente y distribuye el tráfico de manera uniforme entre todas las instancias disponibles.
+
+
+La sesión persistente es importante para aplicaciones que requieren consistencia en las interacciones del usuario, pero puede afectar la escalabilidad, ya que una carga no uniforme podría saturar una instancia en particular.
+
+-------------
 * ¿Qué es una *Virtual Network*? ¿Qué es una *Subnet*? ¿Para qué sirven los *address space* y *address range*?
+
+- **Virtual Network (VNet):** Es una red privada en Azure que permite que diferentes recursos se comuniquen entre sí de manera segura.
+- **Subnet:** Es una división de la VNet que organiza los recursos en subgrupos. Cada subnet tiene un rango de direcciones IP que se asigna para los recursos en su interior.
+
+    - **Address Space:** Define el rango de direcciones IP que puede asignarse en la VNet.
+    - **Address Range:** Especifica el rango de direcciones IP dentro de una subnet en la VNet.
+
+________________
 * ¿Qué son las *Availability Zone* y por qué seleccionamos 3 diferentes zonas?. ¿Qué significa que una IP sea *zone-redundant*?
+
+- **Availability Zones:** Son ubicaciones físicas separadas dentro de una región de Azure, cada una con su propia infraestructura. Al seleccionar tres zonas diferentes, se aumenta la tolerancia a fallos, ya que si una zona falla, las otras dos siguen en funcionamiento.
+
+- **Zone-Redundant IP:** Una IP que es redundante en zonas permite que el tráfico se distribuya de manera automática entre diferentes zonas, mejorando la disponibilidad y resiliencia del servicio.
+
+
+________________
 * ¿Cuál es el propósito del *Network Security Group*?
+
+- El *Network Security Group (NSG)* filtra el tráfico de red hacia y desde los recursos en una VNet. Define reglas de entrada y salida que controlan el acceso, proporcionando una capa adicional de seguridad al restringir el tráfico no deseado.
+
+__________
 * Informe de newman 1 (Punto 2)
-* Presente el Diagrama de Despliegue de la solución.
+  El costo por hora de los diferentes recursos en Azure se detalla a continuación:
 
+- **Máquina virtual B2ms**: 0,148 USD por hora.
+- **Máquina virtual B1ls**: 0,003 USD por hora.
+- **Balanceador de carga**: 0,03 USD por hora.
+- **Red virtual**: 0,002 USD por hora.
 
+Para el modelo de escalabilidad horizontal, el costo por hora es calculado como:
+\[
+(0,003 \, USD \times 3) + (0,002 \, USD \times 3) + 0,03 \, USD = 0,017 \, USD
+\]
+
+### Comparación de Resultados: Escalabilidad Vertical vs. Escalabilidad Horizontal
+
+| Criterio                          | Escalabilidad Vertical (Parte 1) | Escalabilidad Horizontal (Parte 2) |
+|-----------------------------------|----------------------------------|------------------------------------|
+| **Tiempo de respuesta promedio (s)** | 8.9                              | 12.2                               |
+| **Cantidad de peticiones respondidas con éxito** | 20 de 20                         | 20 de 20                           |
+| **Costo/hora**                    | 0,148 USD                        | 0,017 USD                          |
+
+### Análisis
+
+El costo por hora de la escalabilidad horizontal es aproximadamente un **10% del costo por hora de la escalabilidad vertical**, lo que representa una opción mucho más económica. Aunque el tiempo de respuesta promedio es ligeramente mayor en la escalabilidad horizontal, la tasa de éxito de las peticiones se mantiene en ambos casos, mostrando que es una alternativa rentable sin comprometer la disponibilidad del servicio.
+
+__________
+**Presente el Diagrama de Despliegue de la solución.**
+ 
+  - .astha adjunto con los documentos
+  
+<p align="center">
+<img src="images/part2RTA/f.png" alt="" width="700px">
+</p>
 
 
